@@ -8,11 +8,14 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 
 namespace Automation.Wikipedia01.Pages
 {
     class BasePage
     {
+        public static string headerID = "firstHeading";
+        public static string headerXPath = "//h1";
 
         public static void OpenPage(string PageURL)
         {
@@ -20,15 +23,38 @@ namespace Automation.Wikipedia01.Pages
             Console.WriteLine("Opened url: " + PageURL);
         }
 
-        public static void ClickOnElement(string findtype, string element)
+        public static IWebElement FindElementByID(string elementID)
         {
-            if (findtype == "Id")
-                BaseWebDriver.driver.FindElement(By.Id(element)).Click();
-            if (findtype == "Name")
-                BaseWebDriver.driver.FindElement(By.Name(element)).Click();
-            if (findtype == "Class")
-                BaseWebDriver.driver.FindElement(By.ClassName(element)).Click();
-            Console.WriteLine("Element clicked by " + findtype);
+            new WebDriverWait(BaseWebDriver.driver, TimeSpan.FromSeconds(10))
+                .Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.Id(elementID)));
+            IWebElement element = BaseWebDriver.driver.FindElement(By.Id(elementID));
+            Console.WriteLine("Element with ID '" + elementID + "' is VISIBLE.");
+            return element;
+        }
+
+        public static IWebElement FindElementByXpath(string elementXPath)
+        {
+            new WebDriverWait(BaseWebDriver.driver, TimeSpan.FromSeconds(10))
+                .Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath(elementXPath)));
+            IWebElement element = BaseWebDriver.driver.FindElement(By.XPath(elementXPath));
+            Console.WriteLine("Element with XPath '" + elementXPath + "' is VISIBLE.");
+            return element;
+        }
+
+
+        public static void GetTextFromElementXPath(string elementXPath, string elementText)
+        {
+            elementText = FindElementByXpath(elementXPath).GetAttribute("h1");
+        }
+
+        public static void GetTextFromElementID(string elementID, string elementText)
+        {
+            elementText = FindElementByXpath(elementID).GetAttribute("h1");
+        }
+
+        public static void SelectDropdownItem(string itemId)
+        {
+           
         }
     }
     

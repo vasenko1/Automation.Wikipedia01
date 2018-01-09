@@ -22,10 +22,11 @@ namespace Automation.Wikipedia01.Tests
         }
 
         [Test]
-        public static void Click()
+        public static void SearchFlow()
         {
             PrePage.OpenPrePage();
             PrePage.ClickOnLink();
+            MainPage.InputAndSearchByField("iOS");
         }
     }
 }

@@ -8,8 +8,8 @@ namespace Automation.Wikipedia01.Pages
 {
     class PrePage : BasePage
     {
-        public static string PageURL = "http://wikipedia.org";
-        public static string LinkEngId = "js-link-box-en";
+        public static string pageURL = "http://wikipedia.org";
+        public static string linkEngId = "js-link-box-en";
 
         public static void RunTest()
         {
@@ -19,11 +19,11 @@ namespace Automation.Wikipedia01.Pages
 
         public static void OpenPrePage()
         {
-            OpenPage(PageURL);
+            OpenPage(pageURL);
         }
         public static void ClickOnLink()
         {
-            ClickOnElement(LinkEngId, "Id");
+            FindElementByID(linkEngId).Click();
         }
     }
 }

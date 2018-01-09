@@ -16,13 +16,13 @@ namespace Automation.Wikipedia01.Base
     {
         public static IWebDriver driver { get; set; }
 
-        [SetUp]
+        [OneTimeSetUp]
         public static void Initialize()
         {
             driver = new ChromeDriver();
         }
 
-        [TearDown]
+        [OneTimeTearDown]
         public static void Exit()
         {
             driver.Close();
