@@ -13,11 +13,36 @@ namespace Automation.Wikipedia01
 {
     class Assertions
     {
-        public static void IsElementTextCorrect(string elementID, string text)
+        public static void IsElementTextByIdCorrect(string elementID, string text)
         {
-            BasePage.FindElementByID(elementID);
-            IWebElement element = BaseWebDriver.driver.FindElement(By.Id(elementID)); ;
-            Assert.Equals(element.Text, text);
+            string elementText = BasePage.FindElementByID(elementID).Text.ToString();
+            Console.WriteLine("Element text is: " + elementText);
+
+            try
+            {
+                Assert.AreEqual(elementText, text, "Elements are not equal.");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Assertion error is occured:  " + exception.Message);
+            }
+        }
+
+        public static void IsElementTextByXpathCorrect(string elementXpath, string text)
+        {
+            string elementText = BasePage.FindElementByXpath(elementXpath).Text;
+            Console.WriteLine("Element text is: " + elementText);
+
+
+            try
+            {
+                Assert.AreEqual(elementText, text);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Assertion error is occured:");
+                Console.WriteLine(e);
+            }
         }
     }
 }

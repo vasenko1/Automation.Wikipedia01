@@ -27,6 +27,8 @@ namespace Automation.Wikipedia01.Tests
             PrePage.OpenPrePage();
             PrePage.ClickOnLink();
             MainPage.InputAndSearchByField("iOS");
+            //SearchResultPage.ClickEditTab();
+            //EditPage.SelectDropdownItems();
         }
     }
 }

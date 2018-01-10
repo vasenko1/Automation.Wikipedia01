@@ -10,7 +10,7 @@ namespace Automation.Wikipedia01.Pages
     {
         private static string EditTabId = "ca-edit";
 
-        public void ClickEditTab()
+        public static void ClickEditTab()
         {
             FindElementByID(EditTabId).Click();
         }

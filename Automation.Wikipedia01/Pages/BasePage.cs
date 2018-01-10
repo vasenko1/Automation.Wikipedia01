@@ -14,8 +14,7 @@ namespace Automation.Wikipedia01.Pages
 {
     class BasePage
     {
-        public static string headerID = "firstHeading";
-        public static string headerXPath = "//h1";
+
 
         public static void OpenPage(string PageURL)
         {
@@ -25,8 +24,8 @@ namespace Automation.Wikipedia01.Pages
 
         public static IWebElement FindElementByID(string elementID)
         {
-            new WebDriverWait(BaseWebDriver.driver, TimeSpan.FromSeconds(10))
-                .Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.Id(elementID)));
+            new WebDriverWait(BaseWebDriver.driver, TimeSpan.FromSeconds(5))
+                .Until(ExpectedConditions.ElementToBeClickable(By.Id(elementID)));
             IWebElement element = BaseWebDriver.driver.FindElement(By.Id(elementID));
             Console.WriteLine("Element with ID '" + elementID + "' is VISIBLE.");
             return element;
@@ -34,8 +33,8 @@ namespace Automation.Wikipedia01.Pages
 
         public static IWebElement FindElementByXpath(string elementXPath)
         {
-            new WebDriverWait(BaseWebDriver.driver, TimeSpan.FromSeconds(10))
-                .Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath(elementXPath)));
+            new WebDriverWait(BaseWebDriver.driver, TimeSpan.FromSeconds(5))
+                .Until(ExpectedConditions.ElementToBeClickable(By.XPath(elementXPath)));
             IWebElement element = BaseWebDriver.driver.FindElement(By.XPath(elementXPath));
             Console.WriteLine("Element with XPath '" + elementXPath + "' is VISIBLE.");
             return element;
@@ -47,14 +46,17 @@ namespace Automation.Wikipedia01.Pages
             elementText = FindElementByXpath(elementXPath).GetAttribute("h1");
         }
 
-        public static void GetTextFromElementID(string elementID, string elementText)
+        public static string GetTextFromElementID(string elementID)
         {
-            elementText = FindElementByXpath(elementID).GetAttribute("h1");
+            string elementText = FindElementByXpath(elementID).GetAttribute("h1");
+            return elementText;
+            //String count = BaseWebDriver.driver.FindElement(By.XPath("//div[@class='alert alert-count']/p/b").Get();
         }
 
-        public static void SelectDropdownItem(string itemId)
+        public static void SelectDropdownItem(string itemId, string itemXpath)
         {
-           
+            IWebElement dropDown =  BaseWebDriver.driver.FindElement(By.Id(itemId))
+                                    .FindElement(By.XPath(itemXpath));
         }
     }
     
