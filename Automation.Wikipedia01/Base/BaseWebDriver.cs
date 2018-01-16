@@ -14,21 +14,21 @@ namespace Automation.Wikipedia01.Base
     [Parallelizable]
     class BaseWebDriver
     {
-        public static IWebDriver driver { get; set; }
+        public static IWebDriver Driver { get; set; }
 
         [OneTimeSetUp]
         public static void Initialize()
         {
-            driver = new ChromeDriver();
+            Driver = new ChromeDriver();
         }
-
+        
         [OneTimeTearDown]
         public static void Exit()
         {
-            driver.Close();
-            driver.Quit();
+            Driver.Close();
+            Driver.Quit();
         }
-
+        
     }
 
 

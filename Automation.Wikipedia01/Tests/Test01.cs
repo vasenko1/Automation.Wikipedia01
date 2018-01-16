@@ -7,7 +7,7 @@ using Automation.Wikipedia01.Base;
 using Automation.Wikipedia01.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
-
+using OpenQA.Selenium.Support.PageObjects;
 
 namespace Automation.Wikipedia01.Tests
 {
@@ -15,20 +15,21 @@ namespace Automation.Wikipedia01.Tests
     [Parallelizable]
     class Test01 : BaseWebDriver
     {
+        PrePage prePage = new PrePage();
+        MainPage mainPage = new MainPage();
         [Test]
-        public static void Start()
+        public void CheckPrePage()
         {
-            PrePage.RunTest();
+            //PageFactory.InitElements(Driver, prePage);
+            prePage.RunTest();
         }
 
         [Test]
-        public static void SearchFlow()
+        public void SearchFlow()
         {
-            PrePage.OpenPrePage();
-            PrePage.ClickOnLink();
-            MainPage.InputAndSearchByField("iOS");
-            //SearchResultPage.ClickEditTab();
-            //EditPage.SelectDropdownItems();
+            mainPage.RunTest("dropdown");
+            SearchResultPage.ClickEditTab();
+            EditPage.SelectDropdownItems();
         }
     }
 }

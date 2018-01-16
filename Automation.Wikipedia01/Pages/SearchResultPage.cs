@@ -12,7 +12,14 @@ namespace Automation.Wikipedia01.Pages
 
         public static void ClickEditTab()
         {
-            FindElementByID(EditTabId).Click();
+            try
+            {
+                FindElementByID(EditTabId).Click();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
         }
     }
 }

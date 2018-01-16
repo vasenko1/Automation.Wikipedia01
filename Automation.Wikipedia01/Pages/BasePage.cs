@@ -12,31 +12,42 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Automation.Wikipedia01.Pages
 {
-    class BasePage
+    public class BasePage
     {
-
-
-        public static void OpenPage(string PageURL)
+        public BasePage()
         {
-            BaseWebDriver.driver.Navigate().GoToUrl(PageURL);
+            PageFactory.InitElements(BaseWebDriver.Driver, this);
+        }
+
+        public void OpenPage(string PageURL)
+        {
+            BaseWebDriver.Driver.Navigate().GoToUrl(PageURL);
             Console.WriteLine("Opened url: " + PageURL);
         }
+        public void ImplicitWaitByID(IWebElement element)
+        {
+            new WebDriverWait(BaseWebDriver.Driver, TimeSpan.FromSeconds(5))
+                .Until(ExpectedConditions.ElementToBeClickable(element));
+            //Console.WriteLine("Element with ID '" + elementID + "' is VISIBLE.");
+
+        }
+
+
 
         public static IWebElement FindElementByID(string elementID)
         {
-            new WebDriverWait(BaseWebDriver.driver, TimeSpan.FromSeconds(5))
-                .Until(ExpectedConditions.ElementToBeClickable(By.Id(elementID)));
-            IWebElement element = BaseWebDriver.driver.FindElement(By.Id(elementID));
-            Console.WriteLine("Element with ID '" + elementID + "' is VISIBLE.");
+            IWebElement element = new WebDriverWait(BaseWebDriver.Driver, TimeSpan.FromSeconds(5))
+                .Until(ExpectedConditions.ElementExists(By.Id(elementID)));
+            //Console.WriteLine("Element with ID '" + elementID + "' is VISIBLE.");
             return element;
+
         }
 
         public static IWebElement FindElementByXpath(string elementXPath)
         {
-            new WebDriverWait(BaseWebDriver.driver, TimeSpan.FromSeconds(5))
-                .Until(ExpectedConditions.ElementToBeClickable(By.XPath(elementXPath)));
-            IWebElement element = BaseWebDriver.driver.FindElement(By.XPath(elementXPath));
-            Console.WriteLine("Element with XPath '" + elementXPath + "' is VISIBLE.");
+            IWebElement element = new WebDriverWait(BaseWebDriver.Driver, TimeSpan.FromSeconds(5))
+                .Until(ExpectedConditions.ElementExists(By.XPath(elementXPath)));
+            //Console.WriteLine("Element with XPath '" + elementXPath + "' is VISIBLE.");
             return element;
         }
 
@@ -50,13 +61,12 @@ namespace Automation.Wikipedia01.Pages
         {
             string elementText = FindElementByXpath(elementID).GetAttribute("h1");
             return elementText;
-            //String count = BaseWebDriver.driver.FindElement(By.XPath("//div[@class='alert alert-count']/p/b").Get();
         }
 
-        public static void SelectDropdownItem(string itemId, string itemXpath)
+        public static void SelectDropdownItem(string DropdownMenuId, string menuItemText)
         {
-            IWebElement dropDown =  BaseWebDriver.driver.FindElement(By.Id(itemId))
-                                    .FindElement(By.XPath(itemXpath));
+            new SelectElement(BaseWebDriver.Driver.FindElement(By.Id(DropdownMenuId)))
+                .SelectByText(menuItemText);
         }
     }
     
