@@ -54,8 +54,7 @@ namespace Automation.Wikipedia01.Pages
         {
             FindElementByID(DropdownMenuId);
             new SelectElement(BaseWebDriver.Driver.FindElement(By.TagName("select"))).SelectByText(menuItemText);
-
-            Console.WriteLine("SelectDropdownItem is performed!");
+            Console.WriteLine("Dropdown Item '" + menuItemText + "' is selected.");
         }
     }
     

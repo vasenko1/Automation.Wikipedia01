@@ -20,8 +20,8 @@ namespace Automation.Wikipedia01.Base
         [OneTimeTearDown]
         public static void Exit()
         {
-            //Driver.Close();
-            //Driver.Quit();
+            Driver.Close();
+            Driver.Quit();
         }
         
     }
