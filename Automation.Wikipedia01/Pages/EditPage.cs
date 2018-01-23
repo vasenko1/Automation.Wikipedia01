@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Automation.Wikipedia01.Pages
+﻿namespace Automation.Wikipedia01.Pages
 {
     class EditPage : BasePage
     {
-        private static string dropDownItemInsertXpath = "Cyrillic";
+        private static string dropDownItemInsertText = "IPA (English)";
         private static string dropDownMenuID = "editpage-specialchars";
 
-        public static void SelectDropdownItems()
+        public void SelectDropdownItems()
         {
-            SelectDropdownItem(dropDownMenuID, dropDownItemInsertXpath);
+            SelectDropdownItem(dropDownMenuID, dropDownItemInsertText);
         }
     }
 

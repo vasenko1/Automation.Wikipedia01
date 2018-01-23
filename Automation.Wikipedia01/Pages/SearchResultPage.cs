@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Automation.Wikipedia01.Pages
 {
     class SearchResultPage : BasePage
     {
-        private static string EditTabId = "ca-edit";
+        private string EditTabId = "ca-edit";
 
-        public static void ClickEditTab()
+        public void ClickEditTab()
         {
             try
             {
                 FindElementByID(EditTabId).Click();
+                Console.WriteLine("Edit tab is clicked.");
             }
             catch (Exception exception)
             {

@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Automation.Wikipedia01.Base;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -22,8 +18,6 @@ namespace Automation.Wikipedia01.Pages
         private static string TitleXpath = "id('undefined')/html[1]/head[1]/title[1]";
         private static string SearchLanguageId = "searchLanguage";
 
-
-        PrePage prePage = new PrePage();
 
         public void RunTest()
         {

@@ -1,29 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Automation.Wikipedia01.Base;
-using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 
 namespace Automation.Wikipedia01.Pages
 {
     public class BasePage
     {
-        public BasePage()
-        {
-            PageFactory.InitElements(BaseWebDriver.Driver, this);
-        }
-
         public void OpenPage(string PageURL)
         {
             BaseWebDriver.Driver.Navigate().GoToUrl(PageURL);
             Console.WriteLine("Opened url: " + PageURL);
         }
+
         public void ImplicitWaitByID(IWebElement element)
         {
             new WebDriverWait(BaseWebDriver.Driver, TimeSpan.FromSeconds(5))
@@ -31,9 +20,7 @@ namespace Automation.Wikipedia01.Pages
             //Console.WriteLine("Element with ID '" + elementID + "' is VISIBLE.");
 
         }
-
-
-
+        
         public static IWebElement FindElementByID(string elementID)
         {
             IWebElement element = new WebDriverWait(BaseWebDriver.Driver, TimeSpan.FromSeconds(5))
@@ -65,8 +52,10 @@ namespace Automation.Wikipedia01.Pages
 
         public static void SelectDropdownItem(string DropdownMenuId, string menuItemText)
         {
-            new SelectElement(BaseWebDriver.Driver.FindElement(By.Id(DropdownMenuId)))
-                .SelectByText(menuItemText);
+            FindElementByID(DropdownMenuId);
+            new SelectElement(BaseWebDriver.Driver.FindElement(By.TagName("select"))).SelectByText(menuItemText);
+
+            Console.WriteLine("SelectDropdownItem is performed!");
         }
     }
     
