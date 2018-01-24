@@ -1,6 +1,7 @@
 ﻿using System;
 using Automation.Wikipedia01.Base;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 
 namespace Automation.Wikipedia01.Pages
@@ -17,24 +18,19 @@ namespace Automation.Wikipedia01.Pages
         {
             new WebDriverWait(BaseWebDriver.Driver, TimeSpan.FromSeconds(5))
                 .Until(ExpectedConditions.ElementToBeClickable(element));
-            //Console.WriteLine("Element with ID '" + elementID + "' is VISIBLE.");
-
         }
         
         public static IWebElement FindElementByID(string elementID)
         {
             IWebElement element = new WebDriverWait(BaseWebDriver.Driver, TimeSpan.FromSeconds(5))
                 .Until(ExpectedConditions.ElementExists(By.Id(elementID)));
-            //Console.WriteLine("Element with ID '" + elementID + "' is VISIBLE.");
             return element;
-
         }
 
         public static IWebElement FindElementByXpath(string elementXPath)
         {
             IWebElement element = new WebDriverWait(BaseWebDriver.Driver, TimeSpan.FromSeconds(5))
                 .Until(ExpectedConditions.ElementExists(By.XPath(elementXPath)));
-            //Console.WriteLine("Element with XPath '" + elementXPath + "' is VISIBLE.");
             return element;
         }
 
@@ -50,12 +46,14 @@ namespace Automation.Wikipedia01.Pages
             return elementText;
         }
 
-        public static void SelectDropdownItem(string DropdownMenuId, string menuItemText)
+        public static void SelectDropdownItem(string DropdownMenuXpath, string menuItemText)
         {
-            FindElementByID(DropdownMenuId);
-            new SelectElement(BaseWebDriver.Driver.FindElement(By.TagName("select"))).SelectByText(menuItemText);
+            IWebElement element = FindElementByXpath(DropdownMenuXpath);
+            Actions actions = new Actions(BaseWebDriver.Driver);
+            actions.MoveToElement(element);
+            actions.Perform();
+            new SelectElement(element).SelectByText(menuItemText);
             Console.WriteLine("Dropdown Item '" + menuItemText + "' is selected.");
         }
     }
-    
 }

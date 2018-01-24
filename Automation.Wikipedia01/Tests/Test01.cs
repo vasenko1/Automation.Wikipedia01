@@ -20,7 +20,7 @@ namespace Automation.Wikipedia01.Tests
         }
 
         [Test]
-        public void SearchFlow()
+        public void SearchAndEditFlow()
         {
             mp.RunTest("Dropdown");
             srp.ClickEditTab();
